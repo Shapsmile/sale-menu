@@ -5,3 +5,4 @@ salenv
 db.sqlite3
 /static
 .DS_Store
+useful_commands

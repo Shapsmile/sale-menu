@@ -1,0 +1,13 @@
+{% extends 'menu/base_list.html' %}
+
+{% block content %}
+<h3><a href="{% url 'menu:menu_list' %}">К списку меню по калорийности</a></h3>
+<h4>Меню с калорийностью {{menu.min_calories}}-{{menu.max_calories}} ккал</h4>
+<p>This is "menu_detail" template</p>
+<p>Это меню составлено на 4 недели</p>
+<ul>
+{% for week in weeks %}
+	<li><a href="{{ week.id }}">{{week.week_number}}</a></li>
+{% endfor %}
+</ul>
+{% endblock %}

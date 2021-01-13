@@ -1,0 +1,8 @@
+# Создание ORMки аннотированной полем 'calorie_content' = результат
+# расчета калорийности блюда с учетом его калорйности на 100 грамм. 
+queryset = Dish.objects.annotate(
+	calorie_content=ExpressionWrapper(
+		F('weight')/100 * F('calories_per_hundred'), output_field=PositiveIntegerField()))
+# Поскольку F() напрямую не поддерживает, output_field нужно обернуть выражение в ExpressionWrapper.
+# output_field - указывает какое поле присвоить результату вычислений и, соответственно, 
+# аннотированному полю calorie_content.

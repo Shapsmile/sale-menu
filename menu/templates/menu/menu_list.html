@@ -1,0 +1,11 @@
+{% extends 'menu/base_list.html' %}
+
+{% block content %}
+<h1>Меню по калорийности</h1>
+<p>This is "menu_list" template</p>
+    <ul>
+        {% for menu in menus %}
+            <li><a href="menu/{{ menu.id }}">{{ menu.menu_name }}</a></li>
+        {% endfor %}
+    </ul>
+{% endblock %}
