@@ -1,6 +1,6 @@
 *.pyc
 *~
-__pycache__
+/menu/__pycache__/
 salenv
 db.sqlite3
 /static
