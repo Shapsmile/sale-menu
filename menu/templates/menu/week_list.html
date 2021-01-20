@@ -1,5 +1,8 @@
 {% extends 'menu/base_list.html' %}
 
+{% if thing %}
+	<p>{{ thing }}</p>
+{% endif %}
 {% block content %}
 <h3><a href="{% url 'menu:menu_list' %}">К списку меню по калорийности</a></h3>
 <h4>Меню с калорийностью {{menu.min_calories}}-{{menu.max_calories}} ккал</h4>

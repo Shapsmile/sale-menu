@@ -14,12 +14,14 @@ def index(request):
 	return render(request, template_name='menu/menu_list.html', context=context)
 
 
-def get_week_list(request, menu_id):
+def get_week_list(request, menu_id, **kwargs):
+	thing = kwargs
 	weeks = Week.objects.filter(menu__id=menu_id)
 	menu = Menu.objects.get(pk=menu_id)
 	context = {
 		'weeks': weeks,
 		'menu': menu,
+		'thing': thing,
 	}
 	return render(request, template_name='menu/week_list.html', context=context)
 

@@ -1,0 +1,9 @@
+{% extends 'menu/base_list.html' %}
+
+{% block content %}
+	<form action="{% url 'calculator:calorie_rate' %}" method="post">
+    	{% csrf_token %}
+    	{{ form }}
+    	<input type="submit" value="Submit">
+	</form>
+{% endblock %}
