@@ -1,8 +1,9 @@
 *.pyc
 *~
-/menu/__pycache__/
+menu/__pycache__
 salenv
 db.sqlite3
 /static
 .DS_Store
 useful_commands
+/.idea

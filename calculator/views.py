@@ -7,7 +7,6 @@ from django.http import HttpResponseRedirect
 
 # Create your views here.
 def get_calorie_rate(request):
-	# для мужчин: 10 х вес (кг) + 6,25 x рост (см) – 5 х возраст (г) + 5;
 	# если это запрос POST, нам нужно обработать данные формы
 	if request.method == 'POST':
 	# создаем экземпляр формы и заполняем его данными из запроса:
@@ -16,28 +15,30 @@ def get_calorie_rate(request):
 			# обрабатываем данные в form.cleaned_data по мере необходимости
 			# ...
 			# перенаправить на новый URL:
-			# menu_id = int(form.cleaned_data['page'])
-			cr = form.calculate_calorie_rate()
-			target = Menu.objects.filter(max_calories__gte=cr).filter(min_calories__lt=cr)[0].id
-			return redirect('menu:week_list', menu_id=target)
-
+			calorie_rate = form.calculate_calorie_rate()
+			menu_id = Menu.objects.filter(max_calories__gte=calorie_rate).filter(min_calories__lt=calorie_rate)[0].id
+			menu = Menu.objects.get(id=menu_id)
+			context = {
+				'calorie_rate': calorie_rate,
+				'menu': menu,
+			}
+			return render(request, 'calculator/show_calorie_rate.html', context)
 	# если GET (или любой другой метод) мы создадим пустую форму
 	else:
 		form = CalorieForm()
-
 	return render(request, template_name='calculator/calculator.html', context={'form': form})
 
 
-# def show_calorie_rate(request, menu_id, calorie_rate):
-	# """
-	# Получает результат расчета калорийности и выводит менюшку
-	# """
+def show_calorie_rate(request, **kwargs):
+	"""
+	Получает результат расчета калорийности и выводит менюшку
+	"""
 	# calorie_rate = calorie_rate
 	# weeks = Week.objects.filter(menu__id=menu_id)
-	# menu = Menu.objects.get(pk=menu_id)
-	# context = {
-		# 'weeks': weeks,
-		# 'menu': menu,
-		# 'thing': thing,
-	# }
-	# return render(request, template_name='calculator/cal_rate_menu.html', context=context)
+	menu = Menu.objects.get(pk=menu_id)
+	context = {
+		'weeks': weeks,
+		'menu': menu,
+		'thing': thing,
+	}
+	return render(request, template_name='calculator/show_calorie_rate.html')

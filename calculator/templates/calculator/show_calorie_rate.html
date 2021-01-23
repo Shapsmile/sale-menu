@@ -1,0 +1,11 @@
+{% extends 'menu/base_list.html' %}
+
+{% block content %}
+	<p>{{ calorie_rate }}</p>
+	<p>{{ menu.menu_name }}</p>
+	{% if menu.week_set %}
+		{% for week in menu.week_set.all %}
+			<p>{{ week.week_number }}</p>
+		{% endfor %}
+	{% endif %}
+{% endblock %}
