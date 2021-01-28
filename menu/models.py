@@ -3,12 +3,17 @@ from django.db.models import Sum
 from django.shortcuts import reverse
 
 
-"""Модель недели. В идеале к неделе должны привязываться 7 дней,
-	к каждму из которых привязывается 4 приема пищи, соответственно, в 
-	каждый из которых привязывается блюда количество которых не ограничено.
-	Нужно что бы калорийность блюд суммировалась в калорийность приема пищи, 
-	далее калорийность приемов пищи суммируется в калорийность дня. 
-	В итоге калорийность недели это сумма всех калорий."""
+class Client(models.Model):
+	name = models.CharField(max_length=50)
+	email = models.EmailField(default='Shapsmile@mail.ru')
+	calorie_rate = models.IntegerField(blank=True, null=True, default=0)
+	bought_weeks = models.IntegerField(blank=True, null=True, default=0)
+
+	def __str__(self):
+		return self.name
+
+	def get_absolute_url(self):
+		return reverse('menu:client_detail', kwargs={'client_id': self.pk})
 
 
 class Menu(models.Model):

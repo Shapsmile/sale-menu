@@ -1,5 +1,6 @@
 from django import forms
 
+
 GENDER_CHOICES = [
     ('1', 'Мужчина'),
     ('2', 'Женщина'),
@@ -13,8 +14,17 @@ ACTIVITY_COEFFICIENT = [
 	('1.9', 'Экстра-активность'),
 ]
 
+NUMBER_OF_WEEKS = [
+	(1, 'Одна неделя'),
+	(2, 'Две недели'),
+	(3, 'Три недели'),
+	(4, 'Четыре недели'),
+]
+
 
 class CalorieForm(forms.Form):
+	your_name = forms.CharField(label= 'Ваше имя', max_length=50)
+	your_email = forms.CharField(label= 'Ваш Email', max_length=50)
 	your_age = forms.IntegerField(label='Ваш возраст')
 	your_weigth = forms.IntegerField(label='Ваш вес')
 	your_growth = forms.IntegerField(label='Ваш рост')
@@ -43,3 +53,11 @@ class CalorieForm(forms.Form):
 			# для женщин: (10 x вес (кг) + 6.25 x рост (см) – 5 x возраст (г) – 161) x A.
 			cal_rate = (10 * weigth + 6.25 * growth - 5 * age - 161) * float(active_coeff)
 			return int(cal_rate)
+
+
+class BuyingWeeksForm(forms.Form):
+	number_of_weeks = forms.ChoiceField(label='Количество недель',
+        required=False,
+        widget=forms.Select,
+        choices=NUMBER_OF_WEEKS,
+    )

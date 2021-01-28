@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Menu, Week, Day, Meal, Dish
+from .models import Client, Menu, Week, Day, Meal, Dish
 
 
 # admin.site.register(Menu)
@@ -7,6 +7,16 @@ from .models import Menu, Week, Day, Meal, Dish
 # admin.site.register(Day)
 # admin.site.register(Meal)
 # admin.site.register(Dish)
+class MenuInline(admin.TabularInline):
+	model = Menu
+
+
+class ClientAdmin(admin.ModelAdmin):
+	list_display = ('name', 'email', 'calorie_rate', 'bought_weeks')
+	fields = ['name', 'email', 'calorie_rate', 'bought_weeks']
+
+admin.site.register(Client, ClientAdmin)
+
 
 class WeekInline(admin.TabularInline):
 	model = Week

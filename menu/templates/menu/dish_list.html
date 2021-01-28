@@ -1,10 +1,10 @@
 {% extends 'menu/base_list.html' %}
 
 {% block content %}
-	<h1><a href="{% url 'menu:menu_list' %}">К списку меню по калорийности</a></h1>
-	<h1><a href="{% url 'menu:week_list' menu.id %}">Меню с калорийностью 	{{menu.min_calories}}-{{menu.max_calories}} ккал</a></h1>
-	<h2><a href="{% url 'menu:day_list' week.id day.id %}">{{ week.week_number }}</a></h2>
-	<h3><a href="{% url 'menu:meal_list' menu.id week.id day.id %}">{{ day.day_name }}</a></h3>
+	<h3><a href="{% url 'menu:menu_list' %}">К списку меню по калорийности</a></h3>
+	<h4><a href="{% url 'menu:week_list' menu.id %}">Меню с калорийностью 	{{menu.min_calories}}-{{menu.max_calories}} ккал</a></h4>
+	<h4><a href="{% url 'menu:day_list' week.id day.id %}">{{ week.week_number }}</a></h4>
+	<h4><a href="{% url 'menu:meal_list' menu.id week.id day.id %}">{{ day.day_name }}</a></h4>
 	<h4>{{ meal.meal_name }}</h4>
 	<p>This is "meal_detail.html" template</p>
 	<p>Суммарная калорийность {{ meal.meal_name }}а = {{ total }} ккал</p>

@@ -1,11 +1,13 @@
 {% extends 'menu/base_list.html' %}
 
 {% block content %}
-	<p>{{ calorie_rate }}</p>
-	<p>{{ menu.menu_name }}</p>
-	{% if menu.week_set %}
-		{% for week in menu.week_set.all %}
-			<p>{{ week.week_number }}</p>
-		{% endfor %}
-	{% endif %}
+	<p>Привет, {{ client.name }}.</p>
+	<p>Мы расчитали твою норму калорий, она составила {{ client.calorie_rate }} ккал</p>
+	<p>Тебе отлично подойдет тчательно составленное меню на {{ menu.min_calories }}-{{ menu.max_calories }} ккал</p>
+	<p>Меню составлено на 4 недели, индивидуально на каждую неделю, это значит, что блюда не повторяются и что позволит разнообразить рацион. Выбери на сколько недель ты хочешь получить готовое меню. После чего на твой адрес электронной почты "{{ client.email }}" мы отправим письмо</p>
+	<form action="" method="post">
+    	{% csrf_token %}
+    	{{ form }}
+    	<input type="submit" value="Submit">
+	</form>
 {% endblock %}
