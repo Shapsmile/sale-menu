@@ -15,6 +15,8 @@ ACTIVITY_COEFFICIENT = [
 
 
 class CalorieForm(forms.Form):
+	your_name = forms.CharField(label= 'Ваше имя', max_length=50)
+	your_email = forms.CharField(label= 'Ваш Email', max_length=50)
 	your_age = forms.IntegerField(label='Ваш возраст')
 	your_weigth = forms.IntegerField(label='Ваш вес')
 	your_growth = forms.IntegerField(label='Ваш рост')
