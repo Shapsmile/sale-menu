@@ -72,6 +72,3 @@ class Dish(models.Model):
 
 	def __str__(self):
 		return self.dish_name
-
-		
-
