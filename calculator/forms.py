@@ -23,21 +23,39 @@ NUMBER_OF_WEEKS = [
 
 
 class CalorieForm(forms.Form):
-	your_name = forms.CharField(label= 'Ваше имя', max_length=50)
-	your_email = forms.CharField(label= 'Ваш Email', max_length=50)
-	your_age = forms.IntegerField(label='Ваш возраст')
-	your_weigth = forms.IntegerField(label='Ваш вес')
-	your_growth = forms.IntegerField(label='Ваш рост')
-	your_gender = forms.ChoiceField(label='Ваш пол',
-        required=False,
-        widget=forms.RadioSelect,
-        choices=GENDER_CHOICES,
+	your_name = forms.CharField(
+		label= 'Ваше имя', 
+		max_length=50,
+		widget=forms.TextInput(attrs={'class': 'form-control'})
+	)
+	your_email = forms.CharField(
+		label= 'Ваш Email', 
+		max_length=50,
+		widget=forms.EmailInput(attrs={'class': 'form-control'})
+	)
+	your_age = forms.IntegerField(
+		label='Ваш возраст',
+		widget=forms.NumberInput(attrs={'class': 'form-control'})
+	)
+	your_weigth = forms.FloatField(
+		label='Ваш вес',
+		widget=forms.NumberInput(attrs={'class': 'form-control'})
+	)
+	your_growth = forms.IntegerField(
+		label='Ваш рост',
+		widget=forms.NumberInput(attrs={'class': 'form-control'})
+	)
+	active_coeff = forms.ChoiceField(
+		label='Ваша активность',
+        widget=forms.Select(attrs={'class': 'form-inline'}),
+        choices=ACTIVITY_COEFFICIENT
     )
-	active_coeff = forms.ChoiceField(label='Ваша активность',
-        required=False,
-        widget=forms.Select,
-        choices=ACTIVITY_COEFFICIENT,
+	your_gender = forms.ChoiceField(
+		label='Ваш пол',
+        widget=forms.RadioSelect(attrs={'class': 'form-check-input'}),
+        choices=GENDER_CHOICES
     )
+
 	# page = forms.IntegerField(label='Номер меню')
 	def calculate_calorie_rate(self):
 		age = self.cleaned_data['your_age']

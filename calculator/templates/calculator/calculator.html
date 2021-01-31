@@ -3,7 +3,10 @@
 {% block content %}
 	<form action="" method="post">
     	{% csrf_token %}
-    	{{ form }}
-    	<input type="submit" value="Submit">
+    	<div>
+    		{{ form }}
+    		<input type="submit" name="Рассчитать" class="btn btn-primary mb-2">
+    	</div>
+    	
 	</form>
 {% endblock %}

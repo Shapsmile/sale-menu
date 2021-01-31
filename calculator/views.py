@@ -5,6 +5,8 @@ from menu.models import Menu, Client
 from django.urls import reverse
 from django.http import HttpResponseRedirect
 from .forms import BuyingWeeksForm
+from django.core.mail import send_mail, BadHeaderError
+from django.conf import settings
 
 
 def get_calorie_rate(request):
@@ -34,6 +36,13 @@ def show_calorie_rate(request, client_id):
 			context['form'] = form
 			client.bought_weeks = int(number)
 			client.save()
+			subject = 'Меню'
+			message = 'Ваше меню, наслаждайтесь!'
+			to_email = client.email
+			try:
+				send_mail(subject, message, settings.EMAIL_HOST_USER, [to_email], fail_silently=False)
+			except BadHeaderError:
+				HttpResponse('Ошибка')
 			return redirect('calculator:successful_purchase')
 	else:
 		form = BuyingWeeksForm()

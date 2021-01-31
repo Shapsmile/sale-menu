@@ -5,9 +5,12 @@
 	<p>Мы расчитали твою норму калорий, она составила {{ client.calorie_rate }} ккал</p>
 	<p>Тебе отлично подойдет тчательно составленное меню на {{ menu.min_calories }}-{{ menu.max_calories }} ккал</p>
 	<p>Меню составлено на 4 недели, индивидуально на каждую неделю, это значит, что блюда не повторяются и что позволит разнообразить рацион. Выбери на сколько недель ты хочешь получить готовое меню. После чего на твой адрес электронной почты "{{ client.email }}" мы отправим письмо</p>
+	{% if client.bought_weeks %}
+		<p>Ранее ты уже приобретал меню {{ menu.min_calories }}-{{ menu.max_calories }} ккал на {{ client.bought_weeks }} недель.</p>
+	{% endif %}
 	<form action="" method="post">
     	{% csrf_token %}
     	{{ form }}
-    	<input type="submit" value="Submit">
+    	<input type="Submit" value="Submit">
 	</form>
 {% endblock %}
