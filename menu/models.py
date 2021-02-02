@@ -66,7 +66,7 @@ class Dish(models.Model):
 	"""Модель блюда"""
 	dish_name = models.CharField(max_length=100)
 	ingredients = models.TextField(default=None)
-	meals = models.ManyToManyField(Meal)
+	meals = models.ManyToManyField(Meal, null=True, blank=True)
 	calories_per_hundred = models.PositiveIntegerField()
 	weight = models.FloatField(default=0)
 

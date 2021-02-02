@@ -1,0 +1,17 @@
+{% extends 'menu/base_list.html' %}
+
+{% block content %}
+	<div>
+		<form action="{% url 'menu:dish_edit' dish.id %}">
+			{% csrf_token %}
+			<input type="submit" value="Изменить блюдо">
+		</form>
+	</div>
+	<div>
+		<h4>{{ dish.dish_name }}</h4>
+		<p>Состав - {{ dish.ingredients }}</p>
+		<p>Приемы пищи - {{ dish.meals }}</p>
+		<p>Калорийность - {{ dish.calories_per_hundred }} ккал/100 гр.</p>
+		<p>вес - {{ dish.weight }} гр.</p>
+	</div>
+{% endblock %}

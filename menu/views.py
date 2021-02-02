@@ -4,6 +4,7 @@ from .models import Menu, Week, Day, Meal, Dish
 # from .forms import TagForm, PostForm
 # from .utils import ObjectCreateMixin
 from django.db.models import F, Sum, ExpressionWrapper, PositiveIntegerField
+from .forms import DishForm
 
 
 def index(request):
@@ -76,6 +77,38 @@ def get_dish_list(request, menu_id, week_id, day_id, meal_id):
 	return render(request, template_name='menu/dish_list.html', context=context)
 
 
+def global_dish_list(request):
+	dishes = Dish.objects.order_by('dish_name')
+	return render(request, 'menu/global_dish_list.html', {'dishes': dishes})
+
+
+def dish_detail(request, dish_id):
+	dish = Dish.objects.get(id=dish_id)
+	return render(request, 'menu/dish_detail.html', {'dish': dish})
+
+
+# Вьюха для создания блюда
+def dish_create(request):
+	if request.method =='POST':
+		form = DishForm(request.POST)
+		if form.is_valid():
+			dish = form.save()
+			return redirect('menu:dish_detail', dish.id)
+	else:
+		form = DishForm()
+	return render(request, 'menu/dish_create.html', {'form': form})
+
+
+def dish_edit(request, dish_id):
+	dish = Dish.objects.get(id=dish_id)
+	if request.method =='POST':
+		form = DishForm(request.POST, instance=dish)
+		if form.is_valid():
+			form.save()
+			return redirect('menu:dish_detail', dish.id)
+	else:
+		form = DishForm(instance=dish)
+	return render(request, 'menu/dish_edit.html', {'form': form, 'dish': dish})
 #
 #
 # class MenuDetailView(generic.DetailView):

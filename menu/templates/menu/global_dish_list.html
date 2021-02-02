@@ -1,0 +1,16 @@
+{% extends 'menu/base_list.html' %}
+
+{% block content %}
+	<div>
+		<form action="{% url 'menu:dish_create' %}" method="post">
+			{% csrf_token %}
+			<input type="submit" value="Создать новое блюдо">
+		</form>
+	</div>
+	<div>
+		<h4>Все блюда</h4>
+		{% for dish in dishes %}
+			<a href="{% url 'menu:dish_detail' dish.id %}">{{ dish.dish_name }}</p>
+		{% endfor %}
+	</div>
+{% endblock %}

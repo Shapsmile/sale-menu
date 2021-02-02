@@ -1,0 +1,13 @@
+{% extends 'menu/base_list.html' %}
+
+{% block content %}
+	<form action="" method="post">
+		<div>
+			{% csrf_token %}
+			{{ form }}
+		</div>
+		<div>
+			<input type="submit" value="Создать">
+		</div>
+	</form>
+{% endblock %}
